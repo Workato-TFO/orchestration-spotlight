@@ -115,35 +115,20 @@
       return new TextDecoder('utf-8').decode(bytes);
     }
 
-    // Reopening a lab after returning to the hub was reported to sometimes
-    // show a duplicated toolbar. No structural duplication exists in the
-    // markup (verified: exactly one #lab-view/.lab-toolbar/#lab-frame) — this
-    // is a defensive hardening against a rendering artifact from swapping
-    // frame.srcdoc while the fixed-position #lab-view ancestor is still
-    // active, not a fix for a located root cause. Always fully tear down
-    // (clear srcdoc, drop .active) on its own paint frame before applying
-    // the next state, rather than overwriting live state in place.
     function openLab(id, pushState) {
       var el = document.getElementById('lab-data-' + id);
       if (!el) return;
-      var html = decode(el.textContent);
-      frame.srcdoc = '';
-      labView.classList.remove('active');
-      requestAnimationFrame(function () {
-        label.textContent = TITLES[id] || id;
-        hub.style.display = 'none';
-        frame.srcdoc = html;
-        labView.classList.add('active');
-      });
+      frame.srcdoc = decode(el.textContent);
+      label.textContent = TITLES[id] || id;
+      hub.style.display = 'none';
+      labView.classList.add('active');
       if (pushState !== false) history.pushState({ lab: id }, '', '#' + id);
     }
 
     function showHub(pushState) {
-      frame.srcdoc = '';
       labView.classList.remove('active');
-      requestAnimationFrame(function () {
-        hub.style.display = '';
-      });
+      hub.style.display = '';
+      frame.srcdoc = '';
       if (pushState !== false) history.pushState({}, '', '#');
     }
 
