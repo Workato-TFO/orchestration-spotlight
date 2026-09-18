@@ -31,16 +31,20 @@
   }
   h1 { font-size: 1.9rem; margin: 0 0 0.5rem; }
   header p { color: var(--muted); margin: 0; font-size: 1rem; }
-  .labs { display: grid; gap: 1rem; }
+  .labs { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   a.card {
-    display: block; background: var(--card-bg); border: 1px solid var(--card-border);
+    display: flex; flex-direction: column; gap: 0.5rem; min-height: 160px;
+    background: var(--card-bg); border: 1px solid var(--card-border);
     border-radius: 12px; padding: 1.5rem 1.75rem; text-decoration: none; color: inherit;
     transition: border-color 0.15s ease, transform 0.15s ease;
   }
   a.card:hover { border-color: var(--accent); transform: translateY(-1px); }
-  .card h2 { margin: 0 0 0.4rem; font-size: 1.15rem; color: var(--ink); }
-  .card p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
-  .card .meta { display: inline-block; margin-top: 0.75rem; font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+  .card .kicker {
+    margin: 0; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .card h2 { margin: 0; font-size: 1.15rem; color: var(--ink); }
+  .card .meta { margin-top: auto; font-size: 0.78rem; color: var(--accent); font-weight: 600; }
   footer { margin-top: 2.5rem; font-size: 0.78rem; color: var(--muted); }
 
   #lab-view {
@@ -66,21 +70,21 @@
   <div id="hub-view">
     <div class="wrap">
       <header>
-        <p class="eyebrow">Orchestration Spotlight</p>
-        <h1>Orchestration Spotlight — Lab Hub</h1>
-        <p>Pick a lab to open it. Use the Back button (or your browser's back) to return here.</p>
+        <p class="eyebrow">Course</p>
+        <h1>Orchestration Spotlight</h1>
+        <p>Two lab guides: turn a messy, duplicated lead export into routed Salesforce Leads without touching it by hand, then stand up a data pipeline that keeps a warehouse continuously in sync with Salesforce — and wire up an alert that catches a sync failure the moment it happens, not after.</p>
       </header>
       <div class="labs">
       <a class="card" href="#" data-lab="smart-lead-router">
+        <span class="kicker">Lab 1 of 2 · Foundational</span>
         <h2>Smart Lead Router</h2>
-        <p>Clean, map, and route inbound leads — build the full pipeline that turns a messy, duplicated lead export into routed Salesforce Leads (or a notification for disqualified leads).</p>
-        <span class="meta">6 phases · 21 tasks · 2 recipes →</span>
+        <span class="meta">55 minutes</span>
       </a>
 
       <a class="card" href="#" data-lab="data-pipeline-sync">
+        <span class="kicker">Lab 2 of 2 · Foundational</span>
         <h2>Data Pipeline Sync</h2>
-        <p>Keep Snowflake continuously in sync with Salesforce — replicate Lead, Contact, and Account without a recipe per object, then diagnose, recover from, and alert on a sync failure.</p>
-        <span class="meta">5 phases · 17 tasks · 1 pipeline →</span>
+        <span class="meta">40 minutes</span>
       </a>
       </div>
       <footer>Self-contained bundle — both labs are embedded in this single file.</footer>
